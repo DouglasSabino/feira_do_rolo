@@ -4,6 +4,6 @@ const { controllerLogin } = require('../controllers/controllerLogin.js');
 
 const routerLogin = Router();
 
-routerLogin.get('/', controllerLogin.Login);
+routerLogin.post('/', controllerLogin.Login);
 
 module.exports = {routerLogin}
