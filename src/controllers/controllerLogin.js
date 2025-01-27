@@ -4,7 +4,7 @@ const { serviceLogin } = require('../services/serviceLogin.js');
 
 const controllerLogin = {
 
-Login: async (req, res, _next) => {
+Login: async (req, res, next) => {
   const {body} = req;
 
   /** @type {import('express').RequestParamHandler} */
@@ -13,10 +13,11 @@ Login: async (req, res, _next) => {
     return res.status(Number(OK)).json(result);
   } catch (error) {
     console.log(error);
-    return error
+    return next(error);
   }
 }
 
 }
 
 module.exports = {controllerLogin};
+
