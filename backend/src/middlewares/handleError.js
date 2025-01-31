@@ -16,7 +16,7 @@ const middlewareError = (err, _req, res, _next) => {
 
   const error = knowErros[err];
   if(error) return res.status(error.code).json(`${error.message}`);
-  return res.status(INTERNAL_SERVER).json(`Internal Server Error`);
+  return res.status(Number(INTERNAL_SERVER)).json(`Internal Server Error`);
 }
 
 module.exports = { middlewareError };

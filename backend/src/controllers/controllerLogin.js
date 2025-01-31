@@ -4,24 +4,15 @@ const { serviceLogin } = require('../services/serviceLogin.js');
 
 const controllerLogin = {
 
-Login: async (req, res, next) => {
-  /** @type {import('express').RequestParamHandler} */
-  try {
-    const result = await serviceLogin.Login(req.body);
-    return res.status(Number(OK)).json(result);
-  } catch (error) {
-    return next(error);
+  Login: async (req, res, next) => {
+    try {
+      const token = await serviceLogin.Login(req.body);
+      if (token === undefined) return next('USER_NOT_EXIST');
+      return res.status(Number(OK)).json(token);
+    } catch (error) {
+      next(error);
+    }
   }
-},
-
-createUser: async (req, res, next) => {
-  /** @type {import('express').RequestParamHandler} */
-  try {
-    await serviceLogin.createUser(req.body);
-  } catch (error) {
-    return next(error);
-  }
-}
 
 }
 
