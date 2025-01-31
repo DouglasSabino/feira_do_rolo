@@ -9,7 +9,6 @@ const serviceLogin = {
     if (user.lenght !== 0) {
       if (bcrypt.hashSync(password, user.salt) === user.hashPassword) {
         const { hash, salt, ...rest } = user;
-        console.log(`Salt: ${salt}`);
         const token = makeToken.coder(rest);
         return token;
       }

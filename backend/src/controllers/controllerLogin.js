@@ -10,7 +10,7 @@ const controllerLogin = {
       if (token === undefined) return next('USER_NOT_EXIST');
       return res.status(Number(OK)).json(token);
     } catch (error) {
-      next(error);
+      next('USER_NOT_EXIST');
     }
   }
 
