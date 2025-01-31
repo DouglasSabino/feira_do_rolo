@@ -1,13 +1,11 @@
-const { modelLogin } = require('../models/modelLogin.js');
-
+const { db } = require('../models/connection.js');
 
 const modelUser = {
-    createUser: async (user, password) => {
-      const user = await modelLogin.Login(user);
-      if(user.length != 0) return 
-      return "usuario nao existe"
-    }
+  createUser: async ({id, user, hashPassword, salt}) => {
+    const SQL_POST_USER = "INSERT INTO users (id, user, hashPassword, salt) VALUES (?,?,?,?)";
+    await db.execute(SQL_POST_USER,[id, user, hashPassword, salt]);
+   }
 
 }
 
-module.exports = { modelUser }
+module.exports = { modelUser };
