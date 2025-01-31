@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-require('dotenv').config();
-const { PORT } = process.env;
-const { OK } = process.env;
 const { routerLogin } = require("./routers/routerLogin.js");
+const { middlewareError } = require('./middlewares/handleError.js');
+require('dotenv').config();
+const { PORT, OK } = process.env;
 
 app.use(express.json());
 app.use(
@@ -14,7 +14,8 @@ app.use(
 );
 app.use(cors());
 
-app.post('/', routerLogin);
+app.use('/', routerLogin);
+app.use(middlewareError);
 
 app.get('/', (_req, res) => {
     res.status(Number(OK)).json("Olá Mundo");
